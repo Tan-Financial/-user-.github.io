@@ -29,6 +29,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
 .tag-blue { background: #e8f0fe; color: #1a73e8; }
 .tag-orange { background: #fff3e0; color: #e65100; }
 .tag-yellow { background: #fffde7; color: #f9a825; }
+.tag-purple { background: #ede7f6; color: #5e35b1; }
 .red-text { color: #c53030; font-weight: 600; }
 .blue-text { color: #1a73e8; font-weight: 600; }
 .green-text { color: #1e7e34; font-weight: 600; }
@@ -61,20 +62,28 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
 .chart-label { font-size: 12px; fill: #666; }
 .chart-value { font-size: 13px; fill: #1a1a1a; font-weight: 600; }
 .chart-axis { stroke: #e0e0e0; stroke-width: 1; }
+.work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; }
+.work-card { border: 1px solid #e8e8e8; border-radius: 10px; padding: 16px 18px; background: #fafbfc; text-decoration: none; color: inherit; display: block; transition: all 0.2s; }
+.work-card:hover { border-color: #1a1a1a; background: #f5f5f5; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+.work-card .emoji { font-size: 24px; }
+.work-card h4 { font-size: 15px; font-weight: 600; color: #1a1a1a; margin: 4px 0 2px; }
+.work-card .desc { font-size: 12px; color: #888; line-height: 1.5; }
+.work-card .file-tag { display: inline-block; font-size: 10px; background: #e8f0fe; color: #1a73e8; padding: 1px 10px; border-radius: 10px; margin-top: 6px; }
 @media (max-width: 768px) {
   .ppt-slide { padding: 20px 16px; }
   .ppt-arrow { display: none; }
   .compare-left { border-right: none; border-bottom: 2px dashed #e0e0e0; padding-right: 0; padding-bottom: 16px; margin-bottom: 16px; }
   .compare-right { padding-left: 0; }
+  .work-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
 <div id="ppt-container">
 
-<!-- Slide 1: Cover -->
+<!-- Slide 0: Cover + 作品集导航入口 -->
 <div class="ppt-slide active" data-slide="0">
-  <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:80vh; text-align:center;">
+  <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:75vh; text-align:center;">
     <div style="font-size:14px; color:#999; margin-bottom:16px; letter-spacing:2px;">宁德时代 300750.SZ / 03750.HK</div>
     <div style="font-size:36px; font-weight:700; color:#1a1a1a; margin-bottom:12px; line-height:1.2;">财务尽职调查终稿</div>
     <div style="font-size:17px; color:#666; margin-bottom:32px;">AI提取 · 人工复核 · 合规修正</div>
@@ -89,9 +98,50 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
     </div>
     <div style="margin-top:48px; font-size:13px; color:#bbb;">基于2025年年度报告全文 · 数据截至2025年12月31日</div>
   </div>
+
+  <!-- ===== 新增：作品集导航区域 ===== -->
+  <div style="margin-top:16px; padding-top:20px; border-top:2px solid #f0f0f0;">
+    <div style="font-size:14px; font-weight:600; color:#1a1a1a; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
+      <span>📂 作品集导航</span>
+      <span style="font-size:11px; font-weight:400; color:#999;">（持续更新中）</span>
+    </div>
+    <div class="work-grid">
+      <!-- 卡片1：跨行业分析报告（Excel） -->
+      <a href="AIGC财务数据分析及验证作品集全解/数据提取/五家公司_跨行业对比分析.xlsx" class="work-card" target="_blank">
+        <div class="emoji">📊</div>
+        <h4>跨行业财务分析报告</h4>
+        <div class="desc">5家上市公司 · 杜邦拆解 · AI幻觉修正</div>
+        <span class="file-tag">Excel 数据表</span>
+      </a>
+      <!-- 卡片2：跨行业分析报告（PDF/Word） -->
+      <a href="AIGC财务数据分析及验证作品集全解/产出成果/AIGC赋能财务尽调_5家跨行业上市公司财务分析报告.pdf" class="work-card" target="_blank">
+        <div class="emoji">📄</div>
+        <h4>跨行业分析报告（PDF版）</h4>
+        <div class="desc">完整报告 · 可直接打印/展示</div>
+        <span class="file-tag">PDF 终稿</span>
+      </a>
+      <!-- 卡片3：分析流程 -->
+      <a href="AIGC财务数据分析及验证作品集全解/分析流程/方向一_完整执行清单.md" class="work-card" target="_blank">
+        <div class="emoji">📋</div>
+        <h4>分析流程与执行清单</h4>
+        <div class="desc">方向一完整操作步骤</div>
+        <span class="file-tag">Markdown</span>
+      </a>
+      <!-- 卡片4：AI幻觉修正记录 -->
+      <a href="AIGC财务数据分析及验证作品集全解/AI幻觉修正记录/AI幻觉修正记录.md" class="work-card" target="_blank">
+        <div class="emoji">🔍</div>
+        <h4>AI幻觉修正记录</h4>
+        <div class="desc">3个错误案例 · 适用边界总结</div>
+        <span class="file-tag">Markdown</span>
+      </a>
+    </div>
+    <div style="margin-top:10px; font-size:11px; color:#bbb; text-align:center;">
+      ⬆ 以上为同一作品集下的其他项目 · 点击即可查看
+    </div>
+  </div>
 </div>
 
-<!-- Slide 2: DuPont Analysis -->
+<!-- Slide 1: DuPont Analysis -->
 <div class="ppt-slide" data-slide="1">
   <div class="slide-title">杜邦分析拆解：从财报原文到逻辑图</div>
   <div style="display:flex; gap:20px; flex-wrap:wrap; margin-top:16px;">
@@ -162,12 +212,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
   </div>
 </div>
 
-<!-- Slide 3: Key Metrics Trend (NEW) -->
+<!-- Slide 2: Key Metrics Trend -->
 <div class="ppt-slide" data-slide="2">
   <div class="slide-title">关键指标趋势图</div>
   <div class="slide-subtitle">净现比三年均>1.7 · ROE驱动因子贡献度拆解</div>
   <div style="display:flex; gap:20px; flex-wrap:wrap; margin-top:20px;">
-    <!-- Chart 1: 净现比 -->
     <div style="flex:1; min-width:320px;">
       <div class="card" style="padding:20px;">
         <div style="font-size:14px; font-weight:600; color:#1a1a1a; margin-bottom:16px; display:flex; align-items:center; gap:6px;">
@@ -175,37 +224,29 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
           净现比（经营现金流/净利润）
         </div>
         <svg width="100%" height="220" viewBox="0 0 400 220" style="max-width:400px;">
-          <!-- Grid lines -->
           <line x1="50" y1="30" x2="380" y2="30" class="chart-axis"/>
           <line x1="50" y1="80" x2="380" y2="80" class="chart-axis"/>
           <line x1="50" y1="130" x2="380" y2="130" class="chart-axis"/>
           <line x1="50" y1="180" x2="380" y2="180" class="chart-axis"/>
-          <!-- Y-axis labels -->
           <text x="40" y="185" text-anchor="end" class="chart-label">0</text>
           <text x="40" y="135" text-anchor="end" class="chart-label">1.0</text>
           <text x="40" y="85" text-anchor="end" class="chart-label">2.0</text>
           <text x="40" y="35" text-anchor="end" class="chart-label">3.0</text>
-          <!-- Warning line at 1.0 -->
           <line x1="50" y1="130" x2="380" y2="130" stroke="#c53030" stroke-width="1" stroke-dasharray="4,4" opacity="0.5"/>
           <text x="385" y="133" font-size="10" fill="#c53030" opacity="0.7">警戒线 1.0</text>
-          <!-- Bars -->
           <rect x="80" y="55" width="60" height="125" rx="4" fill="#1a73e8" opacity="0.85"/>
           <rect x="200" y="72" width="60" height="108" rx="4" fill="#1a73e8" opacity="0.85"/>
           <rect x="320" y="78" width="60" height="102" rx="4" fill="#1a73e8" opacity="0.85"/>
-          <!-- Values -->
           <text x="110" y="48" text-anchor="middle" class="chart-value">2.10</text>
           <text x="230" y="65" text-anchor="middle" class="chart-value">1.80</text>
           <text x="350" y="71" text-anchor="middle" class="chart-value">1.73</text>
-          <!-- X labels -->
           <text x="110" y="200" text-anchor="middle" class="chart-label">2023年</text>
           <text x="230" y="200" text-anchor="middle" class="chart-label">2024年</text>
           <text x="350" y="200" text-anchor="middle" class="chart-label">2025年</text>
-          <!-- Conclusion -->
           <text x="200" y="18" text-anchor="middle" font-size="12" fill="#1e7e34" font-weight="600">三年均 > 1.7，利润质量优秀，无"纸面富贵"嫌疑</text>
         </svg>
       </div>
     </div>
-    <!-- Chart 2: ROE驱动因子 -->
     <div style="flex:1; min-width:320px;">
       <div class="card" style="padding:20px;">
         <div style="font-size:14px; font-weight:600; color:#1a1a1a; margin-bottom:16px; display:flex; align-items:center; gap:6px;">
@@ -213,22 +254,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
           ROE变动因子贡献度（2025 vs 2024）
         </div>
         <svg width="100%" height="220" viewBox="0 0 400 220" style="max-width:400px;">
-          <!-- Center line -->
           <line x1="50" y1="110" x2="380" y2="110" stroke="#e0e0e0" stroke-width="1"/>
           <text x="40" y="114" text-anchor="end" font-size="11" fill="#999">0</text>
-          <!-- Positive bars (left/up) -->
           <rect x="70" y="30" width="80" height="78" rx="4" fill="#1a73e8" opacity="0.85"/>
           <text x="110" y="22" text-anchor="middle" font-size="13" fill="#1a1a1a" font-weight="600">+4.43pct</text>
-          <!-- Negative bars (right/down) -->
           <rect x="200" y="110" width="50" height="45" rx="4" fill="#c53030" opacity="0.85"/>
           <text x="225" y="168" text-anchor="middle" font-size="13" fill="#1a1a1a" font-weight="600">-1.39pct</text>
           <rect x="290" y="110" width="78" height="70" rx="4" fill="#c53030" opacity="0.85"/>
           <text x="329" y="193" text-anchor="middle" font-size="13" fill="#1a1a1a" font-weight="600">-2.18pct</text>
-          <!-- Labels -->
           <text x="110" y="210" text-anchor="middle" font-size="12" fill="#1a73e8" font-weight="600">净利率 ↑</text>
           <text x="225" y="210" text-anchor="middle" font-size="12" fill="#c53030" font-weight="600">周转率 ↓</text>
           <text x="329" y="210" text-anchor="middle" font-size="12" fill="#c53030" font-weight="600">权益乘数 ↓</text>
-          <!-- Conclusion -->
           <text x="200" y="18" text-anchor="middle" font-size="12" fill="#1a1a1a" font-weight="600">净利率是唯一正向驱动，杠杆与周转双拖累</text>
         </svg>
       </div>
@@ -239,7 +275,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
   </div>
 </div>
 
-<!-- Slide 4: AI Hallucination Record -->
+<!-- Slide 3: AI Hallucination Record -->
 <div class="ppt-slide" data-slide="3">
   <div class="slide-title">AI幻觉修正记录</div>
   <div class="slide-subtitle">内控合规官审查意见 · 逐条标记AI首次输出中的归因偏差</div>
@@ -295,7 +331,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
   </div>
 </div>
 
-<!-- Slide 5: Final Corrections -->
+<!-- Slide 4: Final Corrections -->
 <div class="ppt-slide" data-slide="4">
   <div class="slide-title">终版修正结论</div>
   <div class="slide-subtitle">经人工复核后的严谨表述 · 直接用于尽调报告终稿</div>
@@ -351,7 +387,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
   </div>
 </div>
 
-<!-- Slide 6: Side-by-Side Comparison -->
+<!-- Slide 5: Side-by-Side Comparison -->
 <div class="ppt-slide" data-slide="5">
   <div class="slide-title">AI原始输出 vs 人工合规修正</div>
   <div style="display:flex; gap:0; flex-wrap:wrap; margin-top:16px;">
@@ -401,7 +437,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
   </div>
 </div>
 
-<!-- Slide 7: Project Retrospective -->
+<!-- Slide 6: Project Retrospective -->
 <div class="ppt-slide" data-slide="6">
   <div class="slide-title">项目复盘 · 我学到了什么</div>
   <div class="slide-subtitle">从AI执行者到AI审核者的跃迁</div>
