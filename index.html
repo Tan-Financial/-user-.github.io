@@ -55,13 +55,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
 .hallucination-card-yellow { background: #fffde7; border-left: 4px solid #f9a825; }
 .page-num { position: fixed; bottom: 20px; right: 24px; font-size: 12px; color: #bbb; z-index: 10; }
 .keyboard-hint { position: fixed; bottom: 20px; left: 24px; font-size: 11px; color: #ccc; z-index: 10; }
-.chart-bar { fill: #1a73e8; }
-.chart-bar-2 { fill: #c53030; }
-.chart-bar-3 { fill: #1e7e34; }
-.chart-bar-4 { fill: #7c3aed; }
-.chart-label { font-size: 12px; fill: #666; }
-.chart-value { font-size: 13px; fill: #1a1a1a; font-weight: 600; }
-.chart-axis { stroke: #e0e0e0; stroke-width: 1; }
 .work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; }
 .work-card { border: 1px solid #e8e8e8; border-radius: 10px; padding: 16px 18px; background: #fafbfc; text-decoration: none; color: inherit; display: block; transition: all 0.2s; }
 .work-card:hover { border-color: #1a1a1a; background: #f5f5f5; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
@@ -81,13 +74,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
 <body>
 <div id="ppt-container">
 
-<!-- Slide 0: Cover + 作品集导航入口 -->
+<!-- ==================== Slide 0: Cover ==================== -->
 <div class="ppt-slide active" data-slide="0">
   <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:75vh; text-align:center;">
     <div style="font-size:14px; color:#999; margin-bottom:16px; letter-spacing:2px;">宁德时代 300750.SZ / 03750.HK</div>
     <div style="font-size:36px; font-weight:700; color:#1a1a1a; margin-bottom:12px; line-height:1.2;">财务尽职调查终稿</div>
     <div style="font-size:17px; color:#666; margin-bottom:32px;">AI提取 · 人工复核 · 合规修正</div>
-    <div style="font-size:15px; font-weight:600; color:#1a73e8; margin-bottom:40px; padding: 8px 20px; border-radius: 8px; background: #e8f0fe;">
+    <div style="font-size:15px; font-weight:600; color:#1a73e8; margin-bottom:40px; padding:8px 20px; border-radius:8px; background:#e8f0fe;">
       AI自动提取财报数据 → 人工识别并修正3处AI归因谬误 → 生成可交付的尽调报告
     </div>
     <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
@@ -99,62 +92,57 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
     <div style="margin-top:48px; font-size:13px; color:#bbb;">基于2025年年度报告全文 · 数据截至2025年12月31日</div>
   </div>
 
-  <!-- ===== 新增：作品集导航区域 ===== -->
-<div style="margin-top:16px; padding-top:20px; border-top:2px solid #f0f0f0;">
+  <!-- 作品集导航区域 -->
+  <div style="margin-top:16px; padding-top:20px; border-top:2px solid #f0f0f0;">
     <div style="font-size:14px; font-weight:600; color:#1a1a1a; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
-        <span>📂 作品集导航</span>
-        <span style="font-size:11px; font-weight:400; color:#999;">（持续更新中）</span>
+      <span>📂 作品集导航</span>
+      <span style="font-size:11px; font-weight:400; color:#999;">（持续更新中）</span>
     </div>
     <div class="work-grid">
-    <!-- 卡片1：数据提取（文件夹） -->
-    <a href="https://github.com/Tan-Financial/-user-.github.io/tree/main/AIGC财务数据分析及验证作品集全解/数据提取" class="work-card" target="_blank">
+      <a href="https://github.com/Tan-Financial/-user-.github.io/tree/main/AIGC财务数据分析及验证作品集全解/数据提取" class="work-card" target="_blank">
         <div class="emoji">📊</div>
         <h4>核心财务数据提取表</h4>
         <div class="desc">5家公司Excel数据底稿（点击查看）</div>
         <span class="file-tag">📁 文件列表</span>
-    </a>
-    <!-- 卡片2：分析流程（文件夹） -->
-    <a href="https://github.com/Tan-Financial/-user-.github.io/tree/main/AIGC财务数据分析及验证作品集全解/分析流程" class="work-card" target="_blank">
+      </a>
+      <a href="https://github.com/Tan-Financial/-user-.github.io/tree/main/AIGC财务数据分析及验证作品集全解/分析流程" class="work-card" target="_blank">
         <div class="emoji">📋</div>
         <h4>分析流程（5家公司明细）</h4>
         <div class="desc">各家杜邦分析底稿与结论（点击查看）</div>
         <span class="file-tag">📁 文件列表</span>
-    </a>
-    <!-- 卡片3：AI幻觉修正记录（docx） -->
-    <a href="AIGC财务数据分析及验证作品集全解/AI幻觉修正记录/AI辅助分析_问题记录与修正日志.docx" class="work-card" target="_blank">
+      </a>
+      <a href="AIGC财务数据分析及验证作品集全解/AI幻觉修正记录/AI辅助分析_问题记录与修正日志.docx" class="work-card" target="_blank">
         <div class="emoji">🔍</div>
         <h4>AI幻觉修正记录</h4>
         <div class="desc">问题记录与修正日志</div>
         <span class="file-tag">DOCX</span>
-    </a>
-    <!-- 卡片4：跨行业分析报告（PDF） -->
-    <a href="AIGC财务数据分析及验证作品集全解/产出成果/AIGC赋能财务尽调_5家跨行业上市公司财务分析报告.pdf" class="work-card" target="_blank">
+      </a>
+      <a href="AIGC财务数据分析及验证作品集全解/产出成果/AIGC赋能财务尽调_5家跨行业上市公司财务分析报告.pdf" class="work-card" target="_blank">
         <div class="emoji">📄</div>
         <h4>跨行业分析报告（PDF版）</h4>
         <div class="desc">完整报告 · 可直接打印/展示</div>
         <span class="file-tag">PDF 终稿</span>
-    </a>
-    <!-- 卡片5（新增）：财报舞弊识别清单 -->
-    <a href="财报舞弊识别清单_v2.0.pdf" class="work-card" target="_blank">
+      </a>
+      <a href="财报舞弊识别清单_v2.0.pdf" class="work-card" target="_blank">
         <div class="emoji">🛡️</div>
         <h4>财报舞弊识别清单 v2.0</h4>
         <div class="desc">20项核心信号 · 量化阈值 · AI指令 · 行业特例</div>
         <span class="file-tag">PDF</span>
-    </a>
-    <!-- 卡片6（新增）：财报舞弊速查卡片 -->
-    <a href="财报舞弊识别速查卡片_v2.0.pdf" class="work-card" target="_blank">
+      </a>
+      <a href="财报舞弊识别速查卡片_v2.0.pdf" class="work-card" target="_blank">
         <div class="emoji">⚡</div>
         <h4>财报舞弊速查卡片 v2.0</h4>
         <div class="desc">A4速查版 · 左侧信号 · 右侧标准+AI指令</div>
         <span class="file-tag">PDF</span>
-    </a>
-</div>
-    <div style="margin-top:10px; font-size:11px; color:#bbb; text-align:center;">
-        ⬆ 以上为同一作品集下的其他项目 · 点击即可查看
+      </a>
     </div>
+    <div style="margin-top:10px; font-size:11px; color:#bbb; text-align:center;">
+      ⬆ 以上为同一作品集下的其他项目 · 点击即可查看
+    </div>
+  </div>
 </div>
 
-<!-- Slide 1: DuPont Analysis -->
+<!-- ==================== Slide 1: DuPont Analysis ==================== -->
 <div class="ppt-slide" data-slide="1">
   <div class="slide-title">杜邦分析拆解：从财报原文到逻辑图</div>
   <div style="display:flex; gap:20px; flex-wrap:wrap; margin-top:16px;">
@@ -164,7 +152,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
         原始财报长文本（第二节·主要会计数据）
       </div>
       <div class="card chaos-text">
-<span class="highlight-revenue">营业收入 423,701,834 千元 同比增长17.04%</span> ... <span class="highlight-profit">归属于上市公司股东的净利润 72,201,282 千元</span> ... <span class="highlight-cash">经营活动产生的现金流量净额 133,219,982 千元</span> ... <span class="highlight-asset">归属于上市公司股东的净资产 337,107,747 千元</span> ... <span class="highlight-asset">总资产 974,827,544 千元</span> ... <span class="highlight-ratio">资产负债率 61.94%</span> ... <span class="highlight-rd">研发投入 22,163,053 千元 占营业收入比例5.23%</span> ... 产能利用率 96.9% ... 动力电池系统销量 381.3GWh 同比增长52.43% ... 储能电池系统销量 93.9GWh 同比增长33.49% ... 境外收入占比 30.60% ... 毛利率 26.27% ... 资产减值损失 8,664,552 千元 ... <span class="highlight-asset">存货 94,526,239 千元</span> ... <span class="highlight-revenue">应收账款 76,435,826 千元</span> ... 合同负债 49,216,341 千元 ... <span class="highlight-cash">货币资金 333,513,277 千元</span> ... 短期借款 20,547,190 千元 ... 长期借款 56,803,744 千元 ... 应付债券 19,973,333 千元 ...
+        营业收入 423,701,834 千元 同比增长17.04% ... 归属于上市公司股东的净利润 72,201,282 千元 ... 经营活动产生的现金流量净额 133,219,982 千元 ... 归属于上市公司股东的净资产 337,107,747 千元 ... 总资产 974,827,544 千元 ... 资产负债率 61.94% ... 研发投入 22,163,053 千元 占营业收入比例5.23% ... 产能利用率 96.9% ... 动力电池系统销量 381.3GWh 同比增长52.43% ... 储能电池系统销量 93.9GWh 同比增长33.49% ... 境外收入占比 30.60% ... 毛利率 26.27% ... 资产减值损失 8,664,552 千元 ... 存货 94,526,239 千元 ... 应收账款 76,435,826 千元 ... 合同负债 49,216,341 千元 ... 货币资金 333,513,277 千元 ... 短期借款 20,547,190 千元 ... 长期借款 56,803,744 千元 ... 应付债券 19,973,333 千元 ...
       </div>
       <div style="margin-top:10px; display:flex; gap:6px; flex-wrap:wrap;">
         <span class="tag tag-green" style="font-size:10px;">■ 营收</span>
@@ -180,34 +168,34 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
         <span style="width:6px;height:6px;border-radius:50%;background:#1e7e34;"></span>
         杜邦分析逻辑拆解图
       </div>
-      <div class="card" style="display:flex; flex-direction:column; align-items:center; padding:24px;">
-        <div class="dupont-box roe" style="width:160px;">ROE = 21.42%</div>
-        <div class="dupont-connector"></div>
-        <div class="arrow-down"></div>
+      <div style="display:flex; flex-direction:column; align-items:center; padding:24px; border:1px solid #e8e8e8; border-radius:10px; background:#fff;">
+        <div style="width:160px; border:1px solid #e8e8e8; border-radius:8px; padding:12px 16px; text-align:center; font-size:18px; font-weight:600; background:#1a1a1a; color:#fff;">ROE = 21.42%</div>
+        <div style="width:2px; height:18px; background:#e0e0e0; margin:0 auto;"></div>
+        <div style="width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-top:6px solid #e0e0e0; margin:0 auto;"></div>
         <div style="display:flex; gap:14px; width:100%; justify-content:center; margin-top:10px;">
           <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
-            <div class="dupont-box" style="width:100%; background:#f0f7ff;">
+            <div style="width:100%; border:1px solid #e8e8e8; border-radius:8px; padding:12px 16px; text-align:center; background:#f0f7ff;">
               <div style="font-size:12px; color:#888;">净利率</div>
               <div style="font-size:18px; color:#1a73e8; margin-top:4px; font-weight:600;">17.04%</div>
               <div style="font-size:11px; color:#bbb; margin-top:4px;">↑ +3.02pct</div>
             </div>
-            <div style="font-size:11px; color:#1e7e34; margin-top:6px; text-align:center; font-weight:500;">核心驱动<br/>+4.43pct</div>
+            <div style="font-size:11px; color:#1e7e34; margin-top:6px; text-align:center; font-weight:500;">核心驱动<br>+4.43pct</div>
           </div>
           <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
-            <div class="dupont-box" style="width:100%; background:#fff5f5;">
+            <div style="width:100%; border:1px solid #e8e8e8; border-radius:8px; padding:12px 16px; text-align:center; background:#fff5f5;">
               <div style="font-size:12px; color:#888;">总资产周转率</div>
               <div style="font-size:18px; color:#c53030; margin-top:4px; font-weight:600;">0.43次</div>
               <div style="font-size:11px; color:#bbb; margin-top:4px;">↓ -0.03次</div>
             </div>
-            <div style="font-size:11px; color:#c53030; margin-top:6px; text-align:center; font-weight:500;">负向拖累<br/>-1.39pct</div>
+            <div style="font-size:11px; color:#c53030; margin-top:6px; text-align:center; font-weight:500;">负向拖累<br>-1.39pct</div>
           </div>
           <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
-            <div class="dupont-box" style="width:100%; background:#f8f5ff;">
+            <div style="width:100%; border:1px solid #e8e8e8; border-radius:8px; padding:12px 16px; text-align:center; background:#f8f5ff;">
               <div style="font-size:12px; color:#888;">权益乘数</div>
               <div style="font-size:18px; color:#7c3aed; margin-top:4px; font-weight:600;">2.89</div>
               <div style="font-size:11px; color:#bbb; margin-top:4px;">↓ -0.30</div>
             </div>
-            <div style="font-size:11px; color:#c53030; margin-top:6px; text-align:center; font-weight:500;">负向拖累<br/>-2.18pct</div>
+            <div style="font-size:11px; color:#c53030; margin-top:6px; text-align:center; font-weight:500;">负向拖累<br>-2.18pct</div>
           </div>
         </div>
         <div style="width:100%; margin-top:20px; padding-top:14px; border-top:1px solid #e8e8e8;">
@@ -225,13 +213,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
   </div>
 </div>
 
-<!-- Slide 2: Key Metrics Trend -->
+<!-- ==================== Slide 2: Key Metrics Trend ==================== -->
 <div class="ppt-slide" data-slide="2">
   <div class="slide-title">关键指标趋势图</div>
-  <div class="slide-subtitle">净现比三年均>1.7 · ROE驱动因子贡献度拆解</div>
+  <div class="slide-subtitle">净现比三年均&gt;1.7 · ROE驱动因子贡献度拆解</div>
   <div style="display:flex; gap:20px; flex-wrap:wrap; margin-top:20px;">
     <div style="flex:1; min-width:320px;">
-      <div class="card" style="padding:20px;">
+      <div style="padding:20px; border:1px solid #e8e8e8; border-radius:10px; background:#fff;">
         <div style="font-size:14px; font-weight:600; color:#1a1a1a; margin-bottom:16px; display:flex; align-items:center; gap:6px;">
           <span style="width:8px;height:8px;border-radius:50%;background:#1a73e8;"></span>
           净现比（经营现金流/净利润）
@@ -256,12 +244,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
           <text x="110" y="200" text-anchor="middle" class="chart-label">2023年</text>
           <text x="230" y="200" text-anchor="middle" class="chart-label">2024年</text>
           <text x="350" y="200" text-anchor="middle" class="chart-label">2025年</text>
-          <text x="200" y="18" text-anchor="middle" font-size="12" fill="#1e7e34" font-weight="600">三年均 > 1.7，利润质量优秀，无"纸面富贵"嫌疑</text>
+          <text x="200" y="18" text-anchor="middle" font-size="12" fill="#1e7e34" font-weight="600">三年均 &gt; 1.7，利润质量优秀，无"纸面富贵"嫌疑</text>
         </svg>
       </div>
     </div>
     <div style="flex:1; min-width:320px;">
-      <div class="card" style="padding:20px;">
+      <div style="padding:20px; border:1px solid #e8e8e8; border-radius:10px; background:#fff;">
         <div style="font-size:14px; font-weight:600; color:#1a1a1a; margin-bottom:16px; display:flex; align-items:center; gap:6px;">
           <span style="width:8px;height:8px;border-radius:50%;background:#7c3aed;"></span>
           ROE变动因子贡献度（2025 vs 2024）
@@ -284,15 +272,15 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
     </div>
   </div>
   <div style="margin-top:16px; padding:12px 16px; border-radius:8px; background:#f5f5f5; font-size:13px; color:#666; line-height:1.7;">
-    <strong style="color:#1a1a1a;">结论速览：</strong>净现比三年均>1.7，利润现金含量极高；ROE提升完全由净利率驱动（+4.43pct），总资产周转率（-1.39pct）和权益乘数（-2.18pct）均为负向拖累。这意味着公司盈利质量改善，但资产效率在下降——典型的资本密集型扩张期特征。
+    <strong style="color:#1a1a1a;">结论速览：</strong>净现比三年均&gt;1.7，利润现金含量极高；ROE提升完全由净利率驱动（+4.43pct），总资产周转率（-1.39pct）和权益乘数（-2.18pct）均为负向拖累。这意味着公司盈利质量改善，但资产效率在下降——典型的资本密集型扩张期特征。
   </div>
 </div>
 
-<!-- Slide 3: AI Hallucination Record -->
+<!-- ==================== Slide 3: AI Hallucination Record ==================== -->
 <div class="ppt-slide" data-slide="3">
   <div class="slide-title">AI幻觉修正记录</div>
   <div class="slide-subtitle">内控合规官审查意见 · 逐条标记AI首次输出中的归因偏差</div>
-  <div class="card-raised hallucination-card-red" style="margin-bottom:14px;">
+  <div style="margin-bottom:14px; padding:18px; border:1px solid #e8e8e8; border-left:4px solid #c53030; border-radius:8px; background:#fff5f5;">
     <div style="display:flex; align-items:flex-start; gap:14px;">
       <div style="width:36px; height:36px; border-radius:50%; background:#fde8e8; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:18px;">❌</div>
       <div style="flex:1;">
@@ -307,7 +295,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
       </div>
     </div>
   </div>
-  <div class="card-raised hallucination-card-orange" style="margin-bottom:14px;">
+  <div style="margin-bottom:14px; padding:18px; border:1px solid #e8e8e8; border-left:4px solid #e65100; border-radius:8px; background:#fff8f0;">
     <div style="display:flex; align-items:flex-start; gap:14px;">
       <div style="width:36px; height:36px; border-radius:50%; background:#fff3e0; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:18px;">⚠️</div>
       <div style="flex:1;">
@@ -322,7 +310,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
       </div>
     </div>
   </div>
-  <div class="card-raised hallucination-card-yellow" style="margin-bottom:14px;">
+  <div style="margin-bottom:14px; padding:18px; border:1px solid #e8e8e8; border-left:4px solid #f9a825; border-radius:8px; background:#fffde7;">
     <div style="display:flex; align-items:flex-start; gap:14px;">
       <div style="width:36px; height:36px; border-radius:50%; background:#fffde7; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:18px;">🧩</div>
       <div style="flex:1;">
@@ -332,24 +320,24 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
         </div>
         <div style="font-size:15px; font-weight:600; color:#1a1a1a; margin-bottom:6px;">过度推断：以"满产"论证"存货安全"</div>
         <div style="font-size:13px; color:#666; line-height:1.7;">
-          AI用产能利用率96.9%和销量增长52%推断"存货非滞销"，但存货增速（58%）>销量增速（52%），且电池技术迭代加速。生产端数据无法推出销售端结论，属于<strong style="color:#f9a825;">充分条件谬误</strong>。
+          AI用产能利用率96.9%和销量增长52%推断"存货非滞销"，但存货增速（58%）&gt;销量增速（52%），且电池技术迭代加速。生产端数据无法推出销售端结论，属于<strong style="color:#f9a825;">充分条件谬误</strong>。
         </div>
       </div>
     </div>
   </div>
-  <div class="card" style="background:#fffbeb; border-color:#f6e05e;">
+  <div style="padding:16px; border:1px solid #f6e05e; border-radius:8px; background:#fffbeb;">
     <div style="font-size:13px; color:#666; line-height:1.7;">
-      <strong style="color:#1a1a1a;">修正示例：</strong>AI首次生成的报告误将"投资性房地产公允价值变动"计入核心利润，我通过设定<span class="tag tag-red" style="margin:0 4px;">非经常性损益分离</span>指令进行了强制矫正。所有涉及因果归因的表述必须经过反向压力测试。
+      <strong style="color:#1a1a1a;">修正示例：</strong>AI首次生成的报告误将"投资性房地产公允价值变动"计入核心利润，我通过设定<span style="display:inline-block; padding:2px 10px; border-radius:6px; background:#fde8e8; color:#c53030; font-size:12px; font-weight:500; margin:0 4px;">非经常性损益分离</span>指令进行了强制矫正。所有涉及因果归因的表述必须经过反向压力测试。
     </div>
   </div>
 </div>
 
-<!-- Slide 4: Final Corrections -->
+<!-- ==================== Slide 4: Final Corrections ==================== -->
 <div class="ppt-slide" data-slide="4">
   <div class="slide-title">终版修正结论</div>
   <div class="slide-subtitle">经人工复核后的严谨表述 · 直接用于尽调报告终稿</div>
   <div style="display:flex; flex-direction:column; gap:14px;">
-    <div class="card-raised">
+    <div style="padding:18px; border:1px solid #e8e8e8; border-radius:10px; background:#fafafa;">
       <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
         <span class="tag tag-red">修正1</span>
         <span style="font-size:14px; font-weight:600; color:#1a1a1a;">ROE驱动归因</span>
@@ -365,7 +353,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
         </div>
       </div>
     </div>
-    <div class="card-raised">
+    <div style="padding:18px; border:1px solid #e8e8e8; border-radius:10px; background:#fafafa;">
       <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
         <span class="tag tag-red">修正2</span>
         <span style="font-size:14px; font-weight:600; color:#1a1a1a;">资产周转率归因</span>
@@ -377,11 +365,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
         </div>
         <div style="flex:1; min-width:260px; padding:12px; border-radius:8px; background:#e6f4ea;">
           <div style="font-size:12px; color:#1e7e34; font-weight:600; margin-bottom:6px;">人工复核后</div>
-          <div style="font-size:13px; color:#1a1a1a; line-height:1.7;">周转率下降源于总资产扩张速度（<span class="red-text">+23.9%</span>）>营收增速（<span class="red-text">+17.0%</span>），系海外百亿级产能前置投入所致，与现有产能利用率（96.9%）无关。属于资本密集型扩张期的正常财务特征，而非经营恶化。</div>
+          <div style="font-size:13px; color:#1a1a1a; line-height:1.7;">周转率下降源于总资产扩张速度（<span class="red-text">+23.9%</span>）&gt;营收增速（<span class="red-text">+17.0%</span>），系海外百亿级产能前置投入所致，与现有产能利用率（96.9%）无关。属于资本密集型扩张期的正常财务特征，而非经营恶化。</div>
         </div>
       </div>
     </div>
-    <div class="card-raised">
+    <div style="padding:18px; border:1px solid #e8e8e8; border-radius:10px; background:#fafafa;">
       <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
         <span class="tag tag-red">修正3</span>
         <span style="font-size:14px; font-weight:600; color:#1a1a1a;">存货激增归因</span>
@@ -393,54 +381,54 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
         </div>
         <div style="flex:1; min-width:260px; padding:12px; border-radius:8px; background:#e6f4ea;">
           <div style="font-size:12px; color:#1e7e34; font-weight:600; margin-bottom:6px;">人工复核后</div>
-          <div style="font-size:13px; color:#1a1a1a; line-height:1.7;">存货增速（<span class="red-text">58%</span>）>销量增速（<span class="red-text">52%</span>），且电池技术迭代加速（固态电池过渡期），隐含减值风险上升。需人工调取存货库龄表及期后结转率进行二次验证，AI无法基于现有数据做出"安全"判断。</div>
+          <div style="font-size:13px; color:#1a1a1a; line-height:1.7;">存货增速（<span class="red-text">58%</span>）&gt;销量增速（<span class="red-text">52%</span>），且电池技术迭代加速（固态电池过渡期），隐含减值风险上升。需人工调取存货库龄表及期后结转率进行二次验证，AI无法基于现有数据做出"安全"判断。</div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Slide 5: Side-by-Side Comparison -->
+<!-- ==================== Slide 5: Side-by-Side Comparison ==================== -->
 <div class="ppt-slide" data-slide="5">
   <div class="slide-title">AI原始输出 vs 人工合规修正</div>
   <div style="display:flex; gap:0; flex-wrap:wrap; margin-top:16px;">
-    <div class="compare-left" style="flex:1; min-width:300px;">
+    <div style="flex:1; min-width:300px; border-right:2px dashed #e0e0e0; padding-right:20px;">
       <div style="font-size:14px; font-weight:600; color:#1a1a1a; margin-bottom:14px; display:flex; align-items:center; gap:6px;">
         <span style="width:8px;height:8px;border-radius:50%;background:#c53030;"></span>
         AI原始输出（存疑）
       </div>
       <div style="display:flex; flex-direction:column; gap:12px;">
-        <div class="card" style="background:#fff5f5;">
+        <div style="padding:16px; border:1px solid #e8e8e8; border-radius:8px; background:#fff5f5;">
           <div style="font-size:12px; color:#c53030; font-weight:600; margin-bottom:6px;">修正1 · ROE驱动</div>
           <div style="font-size:13px; color:#888; line-height:1.7;">"净利率提升源于规模效应、议价能力固化，意味着<span style="color:#c53030; font-weight:600;">护城河加深</span>。"</div>
         </div>
-        <div class="card" style="background:#fff5f5;">
+        <div style="padding:16px; border:1px solid #e8e8e8; border-radius:8px; background:#fff5f5;">
           <div style="font-size:12px; color:#c53030; font-weight:600; margin-bottom:6px;">修正2 · 周转率</div>
           <div style="font-size:13px; color:#888; line-height:1.7;">"总资产周转率持续走低……<span style="color:#c53030; font-weight:600;">需关注产能消化进度</span>，属于资产前置、收入滞后。"</div>
         </div>
-        <div class="card" style="background:#fff5f5;">
+        <div style="padding:16px; border:1px solid #e8e8e8; border-radius:8px; background:#fff5f5;">
           <div style="font-size:12px; color:#c53030; font-weight:600; margin-bottom:6px;">修正3 · 存货</div>
           <div style="font-size:13px; color:#888; line-height:1.7;">"存货从598亿增至945亿是<span style="color:#c53030; font-weight:600;">战略性备货而非滞销</span>。判断依据：产能利用率96.9%，产线满产满销。"</div>
         </div>
       </div>
     </div>
-    <div class="compare-right" style="flex:1; min-width:300px;">
+    <div style="flex:1; min-width:300px; padding-left:20px;">
       <div style="font-size:14px; font-weight:600; color:#1a1a1a; margin-bottom:14px; display:flex; align-items:center; gap:6px;">
         <span style="width:8px;height:8px;border-radius:50%;background:#1e7e34;"></span>
         人工合规修正（终稿）
       </div>
       <div style="display:flex; flex-direction:column; gap:12px;">
-        <div class="card" style="background:#e6f4ea;">
+        <div style="padding:16px; border:1px solid #e8e8e8; border-radius:8px; background:#e6f4ea;">
           <div style="font-size:12px; color:#1e7e34; font-weight:600; margin-bottom:6px;">修正1 · ROE驱动</div>
           <div style="font-size:13px; color:#1a1a1a; line-height:1.7;">ROE韧性主因原材料（碳酸锂）价格周期性下行带来的成本红利（外部β），以及H股IPO去杠杆后的财务结构优化。剔除β因素后，企业真实的议价能力（α）贡献率约占总提升的<span style="color:#c53030; font-weight:600;">30%</span>，尚需观察海外盈利持续性。</div>
         </div>
-        <div class="card" style="background:#e6f4ea;">
+        <div style="padding:16px; border:1px solid #e8e8e8; border-radius:8px; background:#e6f4ea;">
           <div style="font-size:12px; color:#1e7e34; font-weight:600; margin-bottom:6px;">修正2 · 周转率</div>
-          <div style="font-size:13px; color:#1a1a1a; line-height:1.7;">周转率下降源于总资产扩张速度（<span style="color:#c53030; font-weight:600;">+23.9%</span>）>营收增速（<span style="color:#c53030; font-weight:600;">+17.0%</span>），系海外百亿级产能前置投入所致，与现有产能利用率（96.9%）无关。属于资本密集型扩张期的正常财务特征，而非经营恶化。</div>
+          <div style="font-size:13px; color:#1a1a1a; line-height:1.7;">周转率下降源于总资产扩张速度（<span style="color:#c53030; font-weight:600;">+23.9%</span>）&gt;营收增速（<span style="color:#c53030; font-weight:600;">+17.0%</span>），系海外百亿级产能前置投入所致，与现有产能利用率（96.9%）无关。属于资本密集型扩张期的正常财务特征，而非经营恶化。</div>
         </div>
-        <div class="card" style="background:#e6f4ea;">
+        <div style="padding:16px; border:1px solid #e8e8e8; border-radius:8px; background:#e6f4ea;">
           <div style="font-size:12px; color:#1e7e34; font-weight:600; margin-bottom:6px;">修正3 · 存货</div>
-          <div style="font-size:13px; color:#1a1a1a; line-height:1.7;">存货增速（<span style="color:#c53030; font-weight:600;">58%</span>）>销量增速（<span style="color:#c53030; font-weight:600;">52%</span>），且电池技术迭代加速（固态电池过渡期），隐含减值风险上升。需人工调取存货库龄表及期后结转率进行二次验证，AI无法基于现有数据做出"安全"判断。</div>
+          <div style="font-size:13px; color:#1a1a1a; line-height:1.7;">存货增速（<span style="color:#c53030; font-weight:600;">58%</span>）&gt;销量增速（<span style="color:#c53030; font-weight:600;">52%</span>），且电池技术迭代加速（固态电池过渡期），隐含减值风险上升。需人工调取存货库龄表及期后结转率进行二次验证，AI无法基于现有数据做出"安全"判断。</div>
         </div>
       </div>
     </div>
@@ -450,20 +438,20 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
   </div>
 </div>
 
-<!-- Slide 6: Project Retrospective -->
+<!-- ==================== Slide 6: Project Retrospective ==================== -->
 <div class="ppt-slide" data-slide="6">
   <div class="slide-title">项目复盘 · 我学到了什么</div>
   <div class="slide-subtitle">从AI执行者到AI审核者的跃迁</div>
   <div style="display:flex; flex-direction:column; gap:16px; margin-top:20px;">
-    <div class="card" style="border-left: 4px solid #1a73e8;">
+    <div style="padding:16px; border:1px solid #e8e8e8; border-left:4px solid #1a73e8; border-radius:8px; background:#fff;">
       <div style="font-size:15px; font-weight:600; color:#1a1a1a; margin-bottom:6px;">① 归因要严谨</div>
       <div style="font-size:13px; color:#666; line-height:1.7;">AI天然倾向于"美化叙事"，必须强制做α/β分离，把行业红利和企业能力分开。</div>
     </div>
-    <div class="card" style="border-left: 4px solid #c53030;">
+    <div style="padding:16px; border:1px solid #e8e8e8; border-left:4px solid #c53030; border-radius:8px; background:#fff;">
       <div style="font-size:15px; font-weight:600; color:#1a1a1a; margin-bottom:6px;">② 数据要交叉验证</div>
       <div style="font-size:13px; color:#666; line-height:1.7;">财务指标必须与业务运营数据（产能利用率、销量增速）对照，否则容易得出矛盾结论。</div>
     </div>
-    <div class="card" style="border-left: 4px solid #7c3aed;">
+    <div style="padding:16px; border:1px solid #e8e8e8; border-left:4px solid #7c3aed; border-radius:8px; background:#fff;">
       <div style="font-size:15px; font-weight:600; color:#1a1a1a; margin-bottom:6px;">③ AI只是草稿机，我是审核者</div>
       <div style="font-size:13px; color:#666; line-height:1.7;">核心价值不是"会写Prompt"，而是"敢对AI的报告说'不'"，并给出专业修正。</div>
     </div>
@@ -473,6 +461,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
   </div>
 </div>
 
+<!-- ==================== Navigation ==================== -->
 <div class="ppt-nav">
   <div class="ppt-dot active" onclick="goTo(0)"></div>
   <div class="ppt-dot" onclick="goTo(1)"></div>
@@ -498,19 +487,50 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
   const total = slides.length;
 
   function update() {
-    slides.forEach((s,i) => s.classList.toggle('active', i===current));
-    dots.forEach((d,i) => d.classList.toggle('active', i===current));
-    pageNum.textContent = (current+1) + ' / ' + total;
+    slides.forEach(function(s, i) {
+      s.classList.toggle('active', i === current);
+    });
+    dots.forEach(function(d, i) {
+      d.classList.toggle('active', i === current);
+    });
+    pageNum.textContent = (current + 1) + ' / ' + total;
   }
-  window.goTo = function(n) { current = n; update(); };
-  window.nextSlide = function() { current = (current+1)%total; update(); };
-  window.prevSlide = function() { current = (current-1+total)%total; update(); };
 
-  document.addEventListener('keydown', function(e){
-    if(e.key==='ArrowRight' || e.key===' ') { e.preventDefault(); nextSlide(); }
-    if(e.key==='ArrowLeft') { e.preventDefault(); prevSlide(); }
+  window.goTo = function(n) {
+    if (n >= 0 && n < total) {
+      current = n;
+      update();
+    }
+  };
+
+  window.nextSlide = function() {
+    current = (current + 1) % total;
+    update();
+  };
+
+  window.prevSlide = function() {
+    current = (current - 1 + total) % total;
+    update();
+  };
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === ' ') {
+      e.preventDefault();
+      window.nextSlide();
+    }
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      window.prevSlide();
+    }
   });
+
+  // 初始化显示
+  update();
 })();
+</script>
+
+</body>
+</html>
 </script>
 </body>
 </html>
