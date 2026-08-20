@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI审计工作流 · 财务分析工具 v1.0</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: #f5f7fa;
+            color: #1a1a1a;
+            line-height: 1.6;
+            padding: 24px 16px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            padding: 32px 28px;
+            position: relative;
+        }
+        /* 头部 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #f0f2f5;
+        }
+        .header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a1a1a;
+            letter-spacing: -0.3px;
+        }
+        .header .badge {
+            font-size: 12px;
+            background: #eef2ff;
+            color: #1a73e8;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-weight: 500;
+            border: 1px solid #dbe4f0;
+        }
+        .header .sub {
+            font-size: 13px;
+            color: #888;
+            margin-top: 4px;
+            display: block;
+        }
+        /* 布局 */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            margin-top: 8px;
+        }
+        @media (max-width: 720px) {
+            .container {
+                padding: 20px 16px;
+            }
+            .two-col {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            .header h1 {
+                font-size: 18px;
+            }
+        }
+        /* 卡片 */
+        .panel {
+            background: #fafbfc;
+            border-radius: 12px;
+            padding: 20px 20px 24px;
+            border: 1px solid #e8ecf0;
+            transition: border-color 0.2s;
+        }
+        .panel-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .panel-title .icon {
+            font-size: 18px;
+        }
+        /* 表单 */
+        .form-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 14px;
+        }
+        .form-group .full {
+            grid-column: 1 / -1;
+        }
+        .form-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: #555;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        .form-label input {
+            font-size: 14px;
+            padding: 8px 12px;
+            border: 1px solid #d0d5dd;
+            border-radius: 8px;
+            background: #ffffff;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            font-family: inherit;
+            width: 100%;
+        }
+        .form-label input:focus {
+            outline: none;
+            border-color: #1a73e8;
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.12);
+        }
+        .form-label .hint {
+            font-size: 10px;
+            color: #999;
+            font-weight: 400;
+        }
+        /* 按钮 */
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 9px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .btn-primary {
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: #333;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+        .btn-secondary {
+            background: #f0f2f5;
+            color: #555;
+        }
+        .btn-secondary:hover {
+            background: #e4e7ec;
+        }
+        .btn-success {
+            background: #1e7e34;
+            color: #fff;
+        }
+        .btn-success:hover {
+            background: #166b2a;
+        }
+        .btn-sm {
+            padding: 5px 14px;
+            font-size: 12px;
+            border-radius: 6px;
+        }
+        /* 结果区 */
+        .result-empty {
+            color: #aaa;
+            font-size: 14px;
+            text-align: center;
+            padding: 32px 0 12px;
+        }
+        .result-empty .big {
+            font-size: 40px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .metric-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .metric-item {
+            background: #fff;
+            border-radius: 8px;
+            padding: 10px 14px;
+            border: 1px solid #e8ecf0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: border-color 0.15s;
+        }
+        .metric-item .label {
+            font-size: 13px;
+            color: #555;
+        }
+        .metric-item .value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        .metric-item .status-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-left: 6px;
+            flex-shrink: 0;
+        }
+        .status-dot.green {
+            background: #1e7e34;
+        }
+        .status-dot.yellow {
+            background: #f9a825;
+        }
+        .status-dot.red {
+            background: #c53030;
+        }
+        .status-dot.gray {
+            background: #ccc;
+        }
+        .anomaly-list {
+            margin-top: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .anomaly-item {
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff;
+            border-left: 3px solid #ccc;
+        }
+        .anomaly-item.danger {
+            border-left-color: #c53030;
+            background: #fff5f5;
+        }
+        .anomaly-item.warning {
+            border-left-color: #f9a825;
+            background: #fffde7;
+        }
+        .anomaly-item.success {
+            border-left-color: #1e7e34;
+            background: #f0faf0;
+        }
+        .anomaly-item .tag {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 1px 10px;
+            border-radius: 12px;
+            background: #f0f2f5;
+            color: #666;
+            flex-shrink: 0;
+        }
+        .anomaly-item .tag.danger-tag {
+            background: #fde8e8;
+            color: #c53030;
+        }
+        .anomaly-item .tag.warning-tag {
+            background: #fff3e0;
+            color: #e65100;
+        }
+        .anomaly-item .tag.success-tag {
+            background: #e6f4ea;
+            color: #1e7e34;
+        }
+        .anomaly-item .msg {
+            flex: 1;
+            color: #333;
+        }
+        .summary-box {
+            margin-top: 14px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .summary-box .count {
+            font-weight: 600;
+        }
+        .summary-box .count.danger {
+            color: #c53030;
+        }
+        .summary-box .count.warning {
+            color: #e65100;
+        }
+        .summary-box .count.success {
+            color: #1e7e34;
+        }
+        .footer-note {
+            margin-top: 16px;
+            font-size: 12px;
+            color: #bbb;
+            text-align: center;
+            border-top: 1px solid #f0f2f5;
+            padding-top: 16px;
+        }
+        .preset-bar {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .preset-btn {
+            padding: 4px 14px;
+            font-size: 12px;
+            border-radius: 14px;
+            border: 1px solid #d0d5dd;
+            background: #fff;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: #555;
+        }
+        .preset-btn:hover {
+            border-color: #1a73e8;
+            color: #1a73e8;
+            background: #f0f5ff;
+        }
+        .status-summary {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+        .status-summary span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .inline-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .inline-dot.green {
+            background: #1e7e34;
+        }
+        .inline-dot.yellow {
+            background: #f9a825;
+        }
+        .inline-dot.red {
+            background: #c53030;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <div>
+                <h1>AI审计工作流 · 财务分析工具 <span style="font-size:14px;font-weight:400;color:#888;margin-left:6px;">v1.0</span></h1>
+                <span class="sub">输入财务数据 → 自动计算指标 → 异常信号标记</span>
+            </div>
+            <span class="badge">⚡ 面试演示版 · 2026</span>
+        </div>
+
+        <div class="two-col">
+            <!-- ===== 左侧：输入区 ===== -->
+            <div class="panel">
+                <div class="panel-title"><span class="icon">📊</span> 数据输入</div>
+
+                <!-- 预设数据快捷填充 -->
+                <div class="preset-bar">
+                    <button class="preset-btn" onclick="loadPreset('catl2024')">宁德时代 2024</button>
+                    <button class="preset-btn" onclick="loadPreset('catl2025')">宁德时代 2025</button>
+                    <button class="preset-btn" onclick="loadPreset('maotai2025')">贵州茅台 2025</button>
+                    <button class="preset-btn" onclick="loadPreset('clear')">清空</button>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        营业收入（亿元）
+                        <input type="number" id="revenue" step="0.01" placeholder="如 4237.02">
+                    </label>
+                    <label class="form-label">
+                        营业成本（亿元）
+                        <input type="number" id="cost" step="0.01" placeholder="如 3123.83">
+                    </label>
+                    <label class="form-label">
+                        归母净利润（亿元）
+                        <input type="number" id="netProfit" step="0.01" placeholder="如 722.01">
+                    </label>
+                    <label class="form-label">
+                        总资产（亿元）
+                        <input type="number" id="totalAssets" step="0.01" placeholder="如 9748.28">
+                    </label>
+                    <label class="form-label">
+                        归母净资产（亿元）
+                        <input type="number" id="equity" step="0.01" placeholder="如 3371.08">
+                    </label>
+                    <label class="form-label">
+                        经营现金流净额（亿元）
+                        <input type="number" id="ocf" step="0.01" placeholder="如 1332.20">
+                    </label>
+                    <label class="form-label full" style="margin-top:4px;">
+                        <span style="font-size:12px;color:#888;">去年毛利率（用于波动检测）</span>
+                        <input type="number" id="prevGrossMargin" step="0.01" placeholder="如 26.27（单位：%）" style="font-size:13px;">
+                    </label>
+                    <label class="form-label full">
+                        <span style="font-size:12px;color:#888;">去年营收（用于增速检测）</span>
+                        <input type="number" id="prevRevenue" step="0.01" placeholder="如 3620.13（亿元）" style="font-size:13px;">
+                    </label>
+                </div>
+
+                <div class="actions">
+                    <button class="btn btn-primary" onclick="runAnalysis()">🚀 开始分析</button>
+                    <button class="btn btn-secondary" onclick="clearAll()">↺ 重置</button>
+                </div>
+
+                <div style="margin-top:12px;font-size:12px;color:#999;background:#f8f9fa;padding:8px 12px;border-radius:6px;">
+                    <strong>💡 提示：</strong> 输入6项核心数据即可自动分析。点击预设按钮快速填充示例数据。
+                </div>
+            </div>
+
+            <!-- ===== 右侧：结果区 ===== -->
+            <div class="panel" id="resultPanel">
+                <div class="panel-title"><span class="icon">🔍</span> 分析结果</div>
+
+                <div id="resultContent">
+                    <div class="result-empty">
+                        <span class="big">📋</span>
+                        输入数据后点击「开始分析」<br>
+                        <span style="font-size:12px;color:#ccc;">将自动计算5项核心指标并检测异常信号</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部 -->
+        <div class="footer-note">
+            基于方案二 · 20项舞弊识别规则 · 可扩展 · 2026
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // 1. 核心计算函数
+        // ============================================================
+        function calcMetrics(data) {
+            const grossMargin = data.revenue > 0 ? (data.revenue - data.cost) / data.revenue * 100 : 0;
+            const netProfitMargin = data.revenue > 0 ? data.netProfit / data.revenue * 100 : 0;
+            const roe = data.equity > 0 ? data.netProfit / data.equity * 100 : 0;
+            const assetLiabilityRatio = data.totalAssets > 0 ? (data.totalAssets - data.equity) / data.totalAssets * 100 :
+            0;
+            const netCashRatio = data.netProfit !== 0 ? data.ocf / data.netProfit : (data.ocf > 0 ? 999 : -999);
+
+            return {
+                grossMargin,
+                netProfitMargin,
+                roe,
+                assetLiabilityRatio,
+                netCashRatio
+            };
+        }
+
+        // ============================================================
+        // 2. 异常检测规则（基于方案二）
+        // ============================================================
+        function detectAnomalies(data, metrics) {
+            const results = [];
+
+            // 规则1：净现比 < 0.8（持续2年——此处简化为单年检测）
+            if (data.netProfit > 0 && metrics.netCashRatio < 0.8) {
+                results.push({
+                    indicator: '净现比',
+                    value: metrics.netCashRatio.toFixed(2),
+                    status: 'danger',
+                    message: '经营现金流/净利润 = ' + metrics.netCashRatio.toFixed(2) + '，低于0.8，利润含金量可能不足'
+                });
+            } else if (data.netProfit > 0 && metrics.netCashRatio >= 0.8) {
+                results.push({
+                    indicator: '净现比',
+                    value: metrics.netCashRatio.toFixed(2),
+                    status: 'success',
+                    message: '经营现金流/净利润 = ' + metrics.netCashRatio.toFixed(2) + '，高于0.8，利润含金量良好'
+                });
+            } else if (data.netProfit < 0 && data.ocf < 0) {
+                results.push({
+                    indicator: '净现比',
+                    value: '双亏损',
+                    status: 'danger',
+                    message: '净利润为负且经营现金流为负，标记为"双亏损"'
+                });
+            }
+
+            // 规则2：资产负债率 > 70%
+            if (metrics.assetLiabilityRatio > 70) {
+                results.push({
+                    indicator: '资产负债率',
+                    value: metrics.assetLiabilityRatio.toFixed(1) + '%',
+                    status: 'warning',
+                    message: '资产负债率 ' + metrics.assetLiabilityRatio.toFixed(1) + '%，超过70%警戒线'
+                });
+            } else {
+                results.push({
+                    indicator: '资产负债率',
+                    value: metrics.assetLiabilityRatio.toFixed(1) + '%',
+                    status: 'success',
+                    message: '资产负债率 ' + metrics.assetLiabilityRatio.toFixed(1) + '%，处于合理范围'
+                });
+            }
+
+            // 规则3：毛利率波动 > 10个百分点（与去年对比）
+            if (data.prevGrossMargin !== undefined && data.prevGrossMargin !== null && data.prevGrossMargin > 0) {
+                const diff = Math.abs(metrics.grossMargin - data.prevGrossMargin);
+                if (diff > 10) {
+                    results.push({
+                        indicator: '毛利率波动',
+                        value: diff.toFixed(1) + ' pct',
+                        status: 'warning',
+                        message: '毛利率同比波动 ' + diff.toFixed(1) + ' 个百分点，超过10pct阈值，需关注'
+                    });
+                } else {
+                    results.push({
+                        indicator: '毛利率波动',
+                        value: diff.toFixed(1) + ' pct',
+                        status: 'success',
+                        message: '毛利率同比波动 ' + diff.toFixed(1) + ' 个百分点，在正常范围内'
+                    });
+                }
+            } else {
+                results.push({
+                    indicator: '毛利率波动',
+                    value: '—',
+                    status: 'gray',
+                    message: '未提供去年毛利率数据，无法检测波动'
+                });
+            }
+
+            // 规则4：ROE < 10%
+            if (metrics.roe < 10 && metrics.roe > 0) {
+                results.push({
+                    indicator: 'ROE',
+                    value: metrics.roe.toFixed(1) + '%',
+                    status: 'warning',
+                    message: 'ROE ' + metrics.roe.toFixed(1) + '%，低于10%，盈利能力偏弱'
+                });
+            } else if (metrics.roe >= 10) {
+                results.push({
+                    indicator: 'ROE',
+                    value: metrics.roe.toFixed(1) + '%',
+                    status: 'success',
+                    message: 'ROE ' + metrics.roe.toFixed(1) + '%，高于10%，盈利水平良好'
+                });
+            } else {
+                results.push({
+                    indicator: 'ROE',
+                    value: metrics.roe.toFixed(1) + '%',
+                    status: 'danger',
+                    message: 'ROE为负，公司处于亏损状态'
+                });
+            }
+
+            // 规则5：净利率 < 10%
+            if (metrics.netProfitMargin < 10 && metrics.netProfitMargin > 0) {
+                results.push({
+                    indicator: '净利率',
+                    value: metrics.netProfitMargin.toFixed(1) + '%',
+                    status: 'warning',
+                    message: '净利率 ' + metrics.netProfitMargin.toFixed(1) + '%，低于10%'
+                });
+            } else if (metrics.netProfitMargin >= 10) {
+                results.push({
+                    indicator: '净利率',
+                    value: metrics.netProfitMargin.toFixed(1) + '%',
+                    status: 'success',
+                    message: '净利率 ' + metrics.netProfitMargin.toFixed(1) + '%，高于10%'
+                });
+            } else {
+                results.push({
+                    indicator: '净利率',
+                    value: metrics.netProfitMargin.toFixed(1) + '%',
+                    status: 'danger',
+                    message: '净利率为负，公司亏损'
+                });
+            }
+
+            // 规则6：营收增速 < 0（如果提供了去年营收）
+            if (data.prevRevenue !== undefined && data.prevRevenue !== null && data.prevRevenue > 0) {
+                const growth = (data.revenue - data.prevRevenue) / data.prevRevenue * 100;
+                if (growth < 0) {
+                    results.push({
+                        indicator: '营收增速',
+                        value: growth.toFixed(1) + '%',
+                        status: 'warning',
+                        message: '营收同比下滑 ' + Math.abs(growth).toFixed(1) + '%'
+                    });
+                } else {
+                    results.push({
+                        indicator: '营收增速',
+                        value: growth.toFixed(1) + '%',
+                        status: 'success',
+                        message: '营收同比增长 ' + growth.toFixed(1) + '%'
+                    });
+                }
+            }
+
+            return results;
+        }
+
+        // ============================================================
+        // 3. 渲染结果
+        // ============================================================
+        function renderResults(data, metrics, anomalies) {
+            const container = document.getElementById('resultContent');
+
+            // 统计异常数量
+            const dangerCount = anomalies.filter(a => a.status === 'danger').length;
+            const warningCount = anomalies.filter(a => a.status === 'warning').length;
+            const successCount = anomalies.filter(a => a.status === 'success').length;
+
+            let html = '';
+
+            // ---- 指标卡片 ----
+            html += `<div class="metric-grid">`;
+            const metricItems = [
+                { label: '毛利率', value: metrics.grossMargin.toFixed(1) + '%', key: 'grossMargin' },
+                { label: '净利率', value: metrics.netProfitMargin.toFixed(1) + '%', key: 'netProfitMargin' },
+                { label: 'ROE', value: metrics.roe.toFixed(1) + '%', key: 'roe' },
+                { label: '资产负债率', value: metrics.assetLiabilityRatio.toFixed(1) + '%', key: 'assetLiabilityRatio' },
+                { label: '净现比', value: metrics.netCashRatio === 999 ? '∞' : metrics.netCashRatio === -999 ? '-∞' :
+                        metrics.netCashRatio.toFixed(2), key: 'netCashRatio' },
+            ];
+            metricItems.forEach(item => {
+                const isPositive = typeof item.value === 'string' ? !item.value.includes('-') && item.value !== '∞' &&
+                    item.value !== '-∞' : item.value >= 0;
+                const dotColor = isPositive ? 'green' : 'red';
+                html += `
+                        <div class="metric-item">
+                            <span class="label">${item.label}</span>
+                            <span class="value">${item.value} <span class="status-dot ${dotColor}"></span></span>
+                        </div>
+                    `;
+            });
+            html += `</div>`;
+
+            // ---- 状态汇总 ----
+            html += `
+                    <div class="status-summary">
+                        <span><span class="inline-dot green"></span> 正常 ${successCount}</span>
+                        <span><span class="inline-dot yellow"></span> 关注 ${warningCount}</span>
+                        <span><span class="inline-dot red"></span> 异常 ${dangerCount}</span>
+                        <span style="color:#999;font-size:12px;">共 ${anomalies.length} 项检测</span>
+                    </div>
+                `;
+
+            // ---- 详细异常列表 ----
+            html += `<div class="anomaly-list">`;
+            anomalies.forEach(item => {
+                let statusClass = item.status;
+                let tagClass = item.status + '-tag';
+                if (statusClass === 'gray') {
+                    statusClass = 'success';
+                    tagClass = 'success-tag';
+                }
+                const tagMap = {
+                    'danger': '⚠️ 异常',
+                    'warning': '🟡 关注',
+                    'success': '✅ 正常',
+                    'gray': '⚪ 无数据'
+                };
+                html += `
+                        <div class="anomaly-item ${statusClass}">
+                            <span class="tag ${tagClass}">${tagMap[item.status] || '⚪ 无数据'}</span>
+                            <span style="font-weight:500;color:#333;min-width:70px;">${item.indicator}</span>
+                            <span style="color:#888;font-size:12px;min-width:50px;">${item.value}</span>
+                            <span class="msg">${item.message}</span>
+                        </div>
+                    `;
+            });
+            html += `</div>`;
+
+            // ---- 快速汇总 ----
+            if (dangerCount > 0 || warningCount > 0) {
+                const level = dangerCount > 0 ? '⚠️ 存在异常信号，建议重点关注' : '🟡 存在关注项，建议进一步核查';
+                html += `
+                        <div class="summary-box" style="border-left:3px solid ${dangerCount > 0 ? '#c53030' : '#f9a825'};">
+                            <span>${level}</span>
+                            <span class="count ${dangerCount > 0 ? 'danger' : 'warning'}">
+                                ${dangerCount > 0 ? dangerCount + '项异常' : warningCount + '项关注'}
+                            </span>
+                        </div>
+                    `;
+            } else {
+                html += `
+                        <div class="summary-box" style="border-left:3px solid #1e7e34;">
+                            <span>✅ 所有检测项均通过，财务指标整体健康</span>
+                            <span class="count success">0项异常</span>
+                        </div>
+                    `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        // ============================================================
+        // 4. 主流程
+        // ============================================================
+        function runAnalysis() {
+            // 读取数据
+            const data = {
+                revenue: parseFloat(document.getElementById('revenue').value) || 0,
+                cost: parseFloat(document.getElementById('cost').value) || 0,
+                netProfit: parseFloat(document.getElementById('netProfit').value) || 0,
+                totalAssets: parseFloat(document.getElementById('totalAssets').value) || 0,
+                equity: parseFloat(document.getElementById('equity').value) || 0,
+                ocf: parseFloat(document.getElementById('ocf').value) || 0,
+                prevGrossMargin: parseFloat(document.getElementById('prevGrossMargin').value) || undefined,
+                prevRevenue: parseFloat(document.getElementById('prevRevenue').value) || undefined,
+            };
+
+            // 基础验证
+            if (data.revenue <= 0 || data.totalAssets <= 0 || data.equity <= 0) {
+                document.getElementById('resultContent').innerHTML = `
+                        <div class="result-empty">
+                            <span class="big">⚠️</span>
+                            请至少填写「营业收入」「总资产」「归母净资产」<br>
+                            <span style="font-size:12px;color:#ccc;">其他数据可选填，填得越多分析越全面</span>
+                        </div>
+                    `;
+                return;
+            }
+
+            // 计算指标
+            const metrics = calcMetrics(data);
+
+            // 异常检测
+            const anomalies = detectAnomalies(data, metrics);
+
+            // 渲染结果
+            renderResults(data, metrics, anomalies);
+        }
+
+        // ============================================================
+        // 5. 预设数据加载
+        // ============================================================
+        const presets = {
+            'catl2024': {
+                revenue: 3620.13,
+                cost: 2735.19,
+                netProfit: 507.45,
+                totalAssets: 7866.58,
+                equity: 2469.30,
+                ocf: 969.90,
+                prevGrossMargin: undefined,
+                prevRevenue: undefined,
+            },
+            'catl2025': {
+                revenue: 4237.02,
+                cost: 3123.83,
+                netProfit: 722.01,
+                totalAssets: 9748.28,
+                equity: 3371.08,
+                ocf: 1332.20,
+                prevGrossMargin: 26.27,
+                prevRevenue: 3620.13,
+            },
+            'maotai2025': {
+                revenue: 1688.38,
+                cost: 148.92,
+                netProfit: 823.20,
+                totalAssets: 3038.35,
+                equity: 2446.38,
+                ocf: 615.22,
+                prevGrossMargin: 92.01,
+                prevRevenue: 1708.99,
+            },
+            'clear': {
+                revenue: '',
+                cost: '',
+                netProfit: '',
+                totalAssets: '',
+                equity: '',
+                ocf: '',
+                prevGrossMargin: '',
+                prevRevenue: '',
+            }
+        };
+
+        function loadPreset(name) {
+            const p = presets[name];
+            if (!p) return;
+            if (name === 'clear') {
+                document.getElementById('revenue').value = '';
+                document.getElementById('cost').value = '';
+                document.getElementById('netProfit').value = '';
+                document.getElementById('totalAssets').value = '';
+                document.getElementById('equity').value = '';
+                document.getElementById('ocf').value = '';
+                document.getElementById('prevGrossMargin').value = '';
+                document.getElementById('prevRevenue').value = '';
+                document.getElementById('resultContent').innerHTML = `
+                        <div class="result-empty">
+                            <span class="big">📋</span>
+                            已清空，输入数据后点击「开始分析」
+                        </div>
+                    `;
+                return;
+            }
+            document.getElementById('revenue').value = p.revenue;
+            document.getElementById('cost').value = p.cost || '';
+            document.getElementById('netProfit').value = p.netProfit || '';
+            document.getElementById('totalAssets').value = p.totalAssets || '';
+            document.getElementById('equity').value = p.equity || '';
+            document.getElementById('ocf').value = p.ocf || '';
+            document.getElementById('prevGrossMargin').value = p.prevGrossMargin !== undefined ? p.prevGrossMargin : '';
+            document.getElementById('prevRevenue').value = p.prevRevenue !== undefined ? p.prevRevenue : '';
+            // 自动运行分析
+            runAnalysis();
+        }
+
+        // ============================================================
+        // 6. 重置
+        // ============================================================
+        function clearAll() {
+            loadPreset('clear');
+        }
+
+        // ============================================================
+        // 7. 回车触发
+        // ============================================================
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.target.tagName === 'INPUT') {
+                runAnalysis();
+            }
+        });
+
+        // 加载时清空状态
+        document.addEventListener('DOMContentLoaded', function() {
+            // 显示空状态
+            document.getElementById('resultContent').innerHTML = `
+                    <div class="result-empty">
+                        <span class="big">📋</span>
+                        输入数据后点击「开始分析」<br>
+                        <span style="font-size:12px;color:#ccc;">将自动计算5项核心指标并检测异常信号</span>
+                    </div>
+                `;
+        });
+    </script>
+
+</body>
+</html>
